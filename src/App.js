@@ -1,25 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect , useState} from 'react';
+import {Switch, Route, Redirect} from 'react-router-dom';
+import './App.css'
+import User from './User';
+import UserPage from './UserPage';
+import ViewPosts from './ViewPosts';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/bootstrap/dist/js/bootstrap.bundle';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+  return(
+    <>
+      <Switch>
+        <Route exact path='/user' component={User}/>
+        <Route exact path='/user/:userId/' component={UserPage}/>
+        <Route exact path='/user/:userId/posts/' component={ViewPosts}/>
+        <Redirect to='/user'/>
+      </Switch>
+    </>
   );
 }
 
