@@ -25,28 +25,34 @@ const ViewPosts=()=>{
     const [buttonTitle, setButtonTitle] = useState("View Comments");
 
     const expandIt = () =>{
-      setExpand(true);
-      setButtonTitle("Hide Comments");
+      
+     if (buttonTitle === "Hide Comments"){
+      setExpand(false);
+      setButtonTitle("View Comments") 
+      }else{
+       setExpand(true);
+       setButtonTitle("Hide Comments"); 
+     } 
     }
 
     return(
-        posts.map((val)=> {
+      <div className="grand-parent">
+        {posts.map((val)=> {
           return(
-          <div key={val.id}>
-          <div className="col-sm-6 flex-grow-1 flex-shrink-1" style={{marginLeft:"10px",marginTop:"10px"}}>
-            <div className="card  card-css">
+          <div className="parent" key={val.id} >
+            <div className="card card-css">
               <div className="card-body">
-                <h5 className="card-title">TITLE : {val.title}</h5>
+                <h5 className="card-title"><strong> {val.title}</strong></h5>
                 <p className="card-text"><small className="text-muted">{val.body}</small></p>
                 <button  className="btn btn-primary" onClick={expandIt}>{buttonTitle}</button>
                 {expand ?
                 <ViewComments id={val.id} /> : null }
               </div>
             </div>
-          </div>
-          </div>
-            
+          </div> 
           )})
+          }
+          </div>
         
     )
 }
